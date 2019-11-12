@@ -3,6 +3,11 @@
 @{
     ViewData["Title"] = "Index";
 }
+<form asp-controller="Empleados" asp-action="Index">
+    <input type="text" placeholder="Nombre" name="nombre"/>
+    <input type="submit" value="Buscar"/>
+</form>
+
 <table class="table table-responsive-sm">
     <thead class="thead-dark">
         <tr>
@@ -11,7 +16,6 @@
             <th>Apellido</th>
             <th>Fecha de Nacimiento</th>
             <th>Imagen</th>
-            <th>Favorito</th>
         </tr>
     </thead>
     <tbody>
@@ -23,9 +27,7 @@
                 <td>@empleado.Apellido</td>
                 <td>@empleado.FechaNacimiento</td>
                 <td><img src="@empleado.Imagen" class="imagen" /></td>
-                <td>
-                    <button><img class="emptyHeart" src="https://www.pinclipart.com/picdir/middle/0-6328_heart-empty-font-awesome-heart-icon-transparent-background.png" /></button>
-                </td>
+
             </tr>
         }
 

@@ -2,7 +2,13 @@
 
 @{
     ViewData["Title"] = "Index";
+
+    //List<Producto> productos = ViewData["productos"] as List<Producto>;
+    string saludo= (string)ViewData["saludo"];
+    string nombre = ViewBag.Nombre as string;
 }
+<h1>@saludo</h1>
+<h1>@nombre</h1>
 <div class="row">
     @foreach (Producto producto in Model)
     {

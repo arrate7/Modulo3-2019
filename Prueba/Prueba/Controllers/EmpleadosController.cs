@@ -23,8 +23,16 @@ namespace Prueba.Controllers
             };
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string nombre)
         {
+            if (String.IsNullOrEmpty(nombre))
+            {
+                return View(Empleados);
+            }
+
+            Empleados = Empleados.Where(x => x.Nombre.ToLower()
+            .Contains(nombre.ToLower())).ToList();
+
             return View(Empleados);
         }
 

@@ -30,6 +30,9 @@ namespace EjercicioProductos.Controllers
         }
         public IActionResult Index()
         {
+            ViewData["saludo"] ="Hola mundo" ;
+            ViewBag.Nombre = "Arrate";
+
             return View(Productos.OrderBy(x => x.Nombre).ToList());
         }
 
