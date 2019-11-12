@@ -1,0 +1,34 @@
+﻿@model List<Empleado>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<table class="table table-responsive-sm">
+    <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Imagen</th>
+            <th>Favorito</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Empleado empleado in Model)
+        {
+            <tr>
+                <td>@empleado.Id</td>
+                <td class="empty">@empleado.Nombre</td>
+                <td>@empleado.Apellido</td>
+                <td>@empleado.FechaNacimiento</td>
+                <td><img src="@empleado.Imagen" class="imagen" /></td>
+                <td>
+                    <button><img class="emptyHeart" src="https://www.pinclipart.com/picdir/middle/0-6328_heart-empty-font-awesome-heart-icon-transparent-background.png" /></button>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
