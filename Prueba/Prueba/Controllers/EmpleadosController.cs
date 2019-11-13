@@ -27,6 +27,7 @@ namespace Prueba.Controllers
         {
             if (String.IsNullOrEmpty(nombre))
             {
+                
                 return View(Empleados);
             }
 

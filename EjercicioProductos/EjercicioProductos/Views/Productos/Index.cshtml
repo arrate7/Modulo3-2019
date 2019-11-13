@@ -2,33 +2,47 @@
 
 @{
     ViewData["Title"] = "Index";
+    //List<string> tipos = (List<string>)ViewData["tipos"];
 
-    //List<Producto> productos = ViewData["productos"] as List<Producto>;
-    string saludo= (string)ViewData["saludo"];
-    string nombre = ViewBag.Nombre as string;
 }
-<h1>@saludo</h1>
-<h1>@nombre</h1>
-<div class="row">
-    @foreach (Producto producto in Model)
-    {
-        <div class="card col-sm-12 col-md-6 col-lg-4" style="width: 18rem;">
-            <img  src="@producto.Imagen" class="card-img-top imagenProducto" alt="@producto.Nombre">
-            <div class="card-body">
-                <h5 class="card-title">@producto.Nombre</h5>
-                <p class="card-text">@producto.Descripcion</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Id: @producto.Id</li>
-                <li class="list-group-item">Tipo: @producto.Tipo</li>
-                <li class="list-group-item">Precio: @producto.Precio</li>
-                <li class="list-group-item">Fecha de Caducidad: @producto.FechaCaducidad</li>
-            </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
-        </div>
+<form asp-controller="Productos" asp-action="Index">
+    @*<input type="text" placeholder="Introduce el término de búsqueda" name="nombre" />*@
+    <select name="tipo"  id="selectTipo">
+        @foreach (string tipo in (List<string>)ViewData["tipos"])
+        {
+            <option  value="@tipo">@tipo</option>
+        }
+    </select>
+    <input type="submit" value="Buscar" />
+</form>
 
-    }
-</div>
+@if (Model.Count == 0)
+{
+    <h1>Ningún resultado</h1>
+}
+else
+{
+    <div class="row" id="row">
+        @foreach (Producto producto in Model)
+        {
+            <div class="card col-sm-12 col-md-6 col-lg-4" style="width: 18rem;">
+                <img src="@producto.Imagen" class="card-img-top imagenProducto" alt="@producto.Nombre">
+                <div class="card-body">
+                    <h5 class="card-title">@producto.Nombre</h5>
+                    <p class="card-text">@producto.Descripcion</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Id: @producto.Id</li>
+                    <li class="list-group-item">Tipo: @producto.Tipo</li>
+                    <li class="list-group-item">Precio: @producto.Precio</li>
+                    <li class="list-group-item">Fecha de Caducidad: @producto.FechaCaducidad</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+
+        }
+    </div>
+}

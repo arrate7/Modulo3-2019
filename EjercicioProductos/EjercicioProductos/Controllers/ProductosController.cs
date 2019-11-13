@@ -28,12 +28,23 @@ namespace EjercicioProductos.Controllers
 
             };
         }
-        public IActionResult Index()
+        public IActionResult Index(string tipo)
         {
-            ViewData["saludo"] ="Hola mundo" ;
-            ViewBag.Nombre = "Arrate";
+            ViewData["tipos"] = Productos.Select(x => x.Tipo).Distinct().ToList();
+           
+            if (String.IsNullOrEmpty(tipo))
+            {
+                return View(Productos);
+            }
 
-            return View(Productos.OrderBy(x => x.Nombre).ToList());
+            List<Producto> productos = Productos.Where(x => x.Tipo == tipo).ToList();
+
+            return View(productos);
+
+            //return View(
+            //    Productos.Where(x=>x.Nombre.ToLower().Contains(nombre.ToLower())  ||
+            //                     x.Descripcion.ToLower().Contains(nombre.ToLower()))
+            //                    .ToList());
         }
 
         public IActionResult ProductosPrecio()
