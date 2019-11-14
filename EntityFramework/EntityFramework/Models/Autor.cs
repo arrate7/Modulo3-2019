@@ -13,5 +13,7 @@ namespace EntityFramework.Models
         public DateTime FechaNacimiento { get; set; }
 
         public List<Obra> Obras { get; set; }
+
+       
     }
 }

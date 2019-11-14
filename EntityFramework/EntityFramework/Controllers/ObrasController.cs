@@ -22,7 +22,10 @@ namespace EntityFramework.Controllers
         // GET: Obras
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Obras.Include(o => o.Autor);
+            var applicationDbContext = _context.Obras.Include(o => o.Autor)
+                .Include(x => x.ObraCategorias)
+                .ThenInclude(x=>x.Categoria);
+
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -60,14 +63,9 @@ namespace EntityFramework.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(AutorObraViewModel obraVM)
+        public async Task<IActionResult> Create(Obra obra)
         {
-            Obra obra = new Obra
-            {
-                Titulo = obraVM.Titulo,
-                AnioPublicacion = obraVM.AnioPublicacion,
-                AutorId = obraVM.AutorId
-            };
+
             if (ModelState.IsValid)
             {
                 _context.Add(obra);

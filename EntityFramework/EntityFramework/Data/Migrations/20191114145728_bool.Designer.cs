@@ -4,14 +4,16 @@ using EntityFramework.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EntityFramework.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191114145728_bool")]
+    partial class @bool
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,7 +93,7 @@ namespace EntityFramework.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("AnioPublicacion")
+                    b.Property<DateTime>("AnioPublicacion")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("AutorId")
@@ -99,6 +101,9 @@ namespace EntityFramework.Data.Migrations
 
                     b.Property<string>("Imagen")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Rented")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Titulo")
                         .HasColumnType("nvarchar(max)");
