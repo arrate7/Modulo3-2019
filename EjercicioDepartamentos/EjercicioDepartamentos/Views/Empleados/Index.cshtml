@@ -1,0 +1,42 @@
+﻿@model List<EjercicioDepartamentos.Models.Empleado>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="row">
+    <form asp-controller="Empleados" asp-action="Index">
+        <input type="text" placeholder="Nombre" name="nombre"/>
+        <select name="departamento">
+            <option value="">Todos</option>
+
+            @foreach (string departamento in (List<string>)ViewData["departamentos"])
+            {
+                <option value="@departamento">@departamento</option>
+            }
+        </select>
+        <input type="submit" value="Buscar" />
+    </form>
+</div>
+<div class="row">
+
+@foreach (Empleado empleado in Model)
+{
+    <div class="card col-sm-12 col-md-6 col-lg-4" style="width: 18rem;">
+        <img src="@empleado.Imagen" class="card-img-top rounded-circle imageCollapse" alt="@empleado.Nombre @empleado.Apellido">
+        <ul class="list-group list-group-flush collapse listaCollapse">
+            <li class="list-group-item">Nombre: @empleado.Nombre</li>
+            <li class="list-group-item">Apellido: @empleado.Apellido</li>
+            <li class="list-group-item">Teléfono: @empleado.Telefono</li>
+            <li class="list-group-item">Email: @empleado.Email</li>
+            <li class="list-group-item">Departamento: @empleado.Departamento.Nombre</li>
+        </ul>
+    </div>
+
+}
+</div>

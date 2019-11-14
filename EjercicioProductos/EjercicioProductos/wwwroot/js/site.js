@@ -4,11 +4,11 @@
 // Write your JavaScript code.
 
 
-let select = document.getElementById('selectTipo');
+//let select = document.getElementById('selectTipo');
 
-select.addEventListener('change', function () {
-    //document.getElementById('row').innerHTML = "";
-    fetch('https://localhost:44363/Productos?tipo=' + select.value);
+//select.addEventListener('change', function () {
+//    //document.getElementById('row').innerHTML = "";
+//    fetch('https://localhost:44363/Productos?tipo=' + select.value);
 
 
-});
+//});
