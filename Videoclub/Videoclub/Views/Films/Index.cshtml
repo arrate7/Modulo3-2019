@@ -1,0 +1,86 @@
+﻿@model List<Videoclub.Models.Film>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+
+<form asp-controller="Films" asp-action="Index">
+    <input  type="text" placeholder="Buscar" name="nombre"/>
+    <select name="genero">
+        <option value="">Todas</option>
+        @foreach (string genero in (List<string>)ViewData["generos"])
+        {
+            <option value="@genero">@genero</option>
+        }
+    </select>
+    <input type="submit" value="Buscar"/>
+</form>
+@if(Model.Count == 0)
+{
+    <h2>Ningún resultado</h2>
+}
+else
+{
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Título
+            </th>
+            <th>
+               Sinopsis
+            </th>
+            <th>
+                Género
+            </th>
+            <th>
+               Alquilado
+            </th>
+            <th>
+               Imagen
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (Film film in Model) {
+        <tr>
+            <td>
+                @film.Titulo
+            </td>
+            <td>
+                @film.Sinospsis
+            </td>
+            <td>
+                @film.Genero
+            </td>
+            <td>
+                @if (film.Rented)
+                {
+                    <p>No disponible</p>
+                }
+                else
+                {
+                    <p>Disponible</p>
+                }
+            </td>
+            <td>
+                <img src="@film.Imagen"/>
+"              </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@film.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@film.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@film.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+}
