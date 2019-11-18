@@ -100,6 +100,15 @@ namespace Videoclub.Controllers
             return View(film);
         }
 
+        public async Task<IActionResult> Alquilar(int id)
+        {
+            Film film = await _context.Films.FindAsync(id);
+
+            return View(film);
+        }
+
+
+
         // POST: Films/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

@@ -179,5 +179,29 @@ namespace Videoclub.Controllers
         {
             return _context.UserFilms.Any(e => e.Id == id);
         }
+
+        public async Task<IActionResult> ConfirmarAlquiler(int id)
+        {
+            Film film =await _context.Films.FindAsync(id);
+            User user = await _context.Users.FindAsync(1);
+
+            UserFilm alquiler = new UserFilm
+            {
+                Film = film,
+                User = user,
+                DateRented = DateTime.Now,
+
+            };
+
+            _context.Add(alquiler);
+            film.Rented = true;
+            _context.Update(film);
+           await  _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+            //RedirectToAction("Index","Films");
+            //RedirectToAction(nameof(Index));
+        }
+
     }
 }
