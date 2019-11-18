@@ -42,27 +42,57 @@ else
         </tr>
     </thead>
     <tbody>
-@foreach (UserFilm alquiler in Model) {
-        <tr>
-            <td>
-                @alquiler.DateRented
-            </td>
-            <td>
-                @alquiler.DateReturned
-            </td>
-            <td>
-                @alquiler.Film.Titulo
-            </td>
-            <td>
-                <img src="@alquiler.Film.Imagen" />
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@alquiler.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@alquiler.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@alquiler.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (UserFilm alquiler in Model)
+        {
+
+
+            @if (alquiler.DateRented.AddDays(3) < DateTime.Now && alquiler.DateReturned == null)
+            {
+                <tr class="table-danger">
+                    <td>
+                        @alquiler.DateRented
+                    </td>
+                    <td>
+                        @alquiler.DateReturned
+                    </td>
+                    <td>
+                        @alquiler.Film.Titulo
+                    </td>
+                    <td>
+                        <img src="@alquiler.Film.Imagen" />
+                    </td>
+                    <td>
+                        <a asp-controller="UserFilms" asp-action="DevolverPelicula" asp-route-id="@alquiler.Id">Devolver Película</a> |
+                        <a asp-action="Edit" asp-route-id="@alquiler.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@alquiler.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@alquiler.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        @alquiler.DateRented
+                    </td>
+                    <td>
+                        @alquiler.DateReturned
+                    </td>
+                    <td>
+                        @alquiler.Film.Titulo
+                    </td>
+                    <td>
+                        <img src="@alquiler.Film.Imagen" />
+                    </td>
+                    <td>
+                        <a asp-controller="UserFilms" asp-action="DevolverPelicula" asp-route-id="@alquiler.Id">Devolver Película</a> |
+                        <a asp-action="Edit" asp-route-id="@alquiler.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@alquiler.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@alquiler.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
 </table>
 

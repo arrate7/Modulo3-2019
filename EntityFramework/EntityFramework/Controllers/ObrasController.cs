@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EntityFramework.Data;
 using EntityFramework.Models;
+using EntityFramework.Models.ViewModels;
 
 namespace EntityFramework.Controllers
 {
@@ -51,11 +52,11 @@ namespace EntityFramework.Controllers
         // GET: Obras/Create
         public async Task<IActionResult> Create()
         {
-            AutorObraViewModel aovm = new AutorObraViewModel
+            CrearObraVM covm = new CrearObraVM
             {
                 Autores = await _context.Autores.ToListAsync()
             };
-            return View(aovm);
+            return View(covm);
         }
 
         // POST: Obras/Create
@@ -63,17 +64,17 @@ namespace EntityFramework.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Obra obra)
+        public async Task<IActionResult> Create(CrearObraVM covm)
         {
 
             if (ModelState.IsValid)
             {
-                _context.Add(obra);
+                _context.Add(covm.Obra);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             //ViewData["AutorId"] = new SelectList(_context.Autores, "Id", "Id", obra.AutorId);
-            return View(obra);
+            return View(covm);
         }
 
         // GET: Obras/Edit/5

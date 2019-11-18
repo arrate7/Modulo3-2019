@@ -203,5 +203,24 @@ namespace Videoclub.Controllers
             //RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> DevolverPelicula(int id)
+        {
+            UserFilm alquiler =await _context.UserFilms.Include(x=>x.Film).FirstOrDefaultAsync(x=>x.Id == id);
+            return View(alquiler);
+        }
+
+        public async Task<IActionResult> ConfirmarDevolucion(int id)
+        {
+            UserFilm alquiler = await _context.UserFilms.Include(x => x.Film).FirstOrDefaultAsync(x => x.Id == id);
+            alquiler.DateReturned = DateTime.Now;
+            Film film = alquiler.Film;
+            film.Rented = false;
+            _context.Update(alquiler);
+            _context.Update(film);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Films");
+        }
+
     }
 }
