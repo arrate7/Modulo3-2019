@@ -7,18 +7,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Identity.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Identity.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
 
         public HomeController(ILogger<HomeController> logger,
-            SignInManager<IdentityUser> signInManager,
-            UserManager<IdentityUser> userManager)
+            SignInManager<AppUser> signInManager,
+            UserManager<AppUser> userManager)
         {
             _logger = logger;
             _signInManager = signInManager;
@@ -29,18 +31,20 @@ namespace Identity.Controllers
         {
             return View();
         }
+
+      [Authorize(Roles ="Administrador")]
         public async Task<IActionResult> Administrador()
         {
-            if (_signInManager.IsSignedIn(User))
-            {
-                IdentityUser user = await _userManager.GetUserAsync(User);
+            //if (_signInManager.IsSignedIn(User))
+            //{
+            //    IdentityUser user = await _userManager.GetUserAsync(User);
 
-                if (await _userManager.IsInRoleAsync(user, "Administrador"))
-                {
-                    return View();
-                }
-            }
-            return NotFound() ;
+            //    if (await _userManager.IsInRoleAsync(user, "Administrador"))
+            //    {
+            //        return View();
+            //    }
+            //}
+            return View();
         }
 
         public IActionResult Privacy()

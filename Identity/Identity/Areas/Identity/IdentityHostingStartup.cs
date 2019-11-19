@@ -1,5 +1,6 @@
 ﻿using System;
 using Identity.Data;
+using Identity.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
